@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-gray-950 text-white antialiased;
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+
+  /* Kiosk touch target minimum */
+  button {
+    @apply min-h-12 cursor-pointer;
+  }
+}
+
+@layer utilities {
+  /* ── 키오스크 라이트 오렌지 테마 ── */
+  :root {
+    --kiosk-orange: #FF6D00;
+    --kiosk-orange-light: #FFF0E6;
+    --kiosk-orange-hover: #E55F00;
+  }
+
+  .seat-btn {
+    @apply flex flex-col items-center justify-center rounded-xl font-semibold text-white transition-all duration-200 select-none;
+    min-height: 72px;
+  }
+  .seat-btn:active { @apply scale-95; }
+
+  /* 키오스크 카드/버튼 */
+  .ki-card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100;
+  }
+  .ki-btn-orange {
+    @apply text-white font-bold rounded-2xl transition-all duration-150 active:opacity-90;
+    background-color: var(--kiosk-orange);
+    min-height: 52px;
+  }
+  .ki-btn-orange:hover { background-color: var(--kiosk-orange-hover); }
+  .ki-btn-gray {
+    @apply bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-600 font-semibold rounded-2xl transition-all duration-150;
+    min-height: 52px;
+  }
+  .ki-tab-active {
+    @apply text-white font-bold rounded-xl;
+    background-color: var(--kiosk-orange);
+  }
+  .ki-tab-inactive {
+    @apply bg-white text-gray-500 font-semibold rounded-xl border border-gray-200;
+  }
+
+  /* ── 관리자 라이트 오렌지 테마 ── */
+  .ad-card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm;
+  }
+  .ad-btn-primary {
+    @apply text-white font-bold rounded-xl transition-all duration-150 active:opacity-90;
+    background-color: var(--kiosk-orange);
+    min-height: 0;
+  }
+  .ad-btn-primary:hover { background-color: var(--kiosk-orange-hover); }
+  .ad-btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-700 font-semibold rounded-xl transition-all duration-150;
+    min-height: 0;
+  }
+  .ad-btn-danger {
+    @apply bg-red-500 hover:bg-red-600 active:bg-red-700 text-white font-bold rounded-xl transition-all duration-150;
+    min-height: 0;
+  }
+  .ad-input {
+    @apply w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-orange-400 transition-colors;
+  }
+  .ad-textarea {
+    @apply w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-orange-400 transition-colors resize-none;
+  }
+
+  /* 구형 다크 클래스 (레거시 — 점진적 제거 예정) */
+  .kiosk-card {
+    @apply bg-gray-900 rounded-2xl border border-gray-800 shadow-xl;
+  }
+  .kiosk-btn-primary {
+    @apply bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold rounded-2xl transition-all duration-150;
+    min-height: 64px;
+  }
+  .kiosk-btn-secondary {
+    @apply bg-gray-700 hover:bg-gray-600 active:bg-gray-800 text-white font-semibold rounded-2xl transition-all duration-150;
+    min-height: 64px;
+  }
+  .kiosk-btn-danger {
+    @apply bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-bold rounded-2xl transition-all duration-150;
+    min-height: 64px;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+}
