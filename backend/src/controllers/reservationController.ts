@@ -89,6 +89,32 @@ export const checkoutReservation = (req: Request, res: Response): void => {
   res.json(r);
 };
 
+export const transferReservation = (req: Request, res: Response): void => {
+  const { id } = req.params;
+  const { newSeatId } = req.body as { newSeatId: string };
+
+  const r = reservations.find((r) => r.reservationId === id && r.status === 'completed');
+  if (!r) { res.status(404).json({ message: '이용 중인 예약을 찾을 수 없습니다.' }); return; }
+
+  const newSeat = seats.find((s) => s.seatId === newSeatId);
+  if (!newSeat) { res.status(404).json({ message: '좌석을 찾을 수 없습니다.' }); return; }
+  if (newSeat.status !== 'available') {
+    res.status(409).json({ message: '이미 사용 중인 좌석입니다.', code: 'SEAT_UNAVAILABLE' });
+    return;
+  }
+
+  const oldSeat = seats.find((s) => s.seatId === r.seatId);
+  if (oldSeat) { oldSeat.status = 'available'; broadcastSeatUpdate(oldSeat.seatId, 'available'); }
+
+  newSeat.status = 'occupied';
+  broadcastSeatUpdate(newSeat.seatId, 'occupied');
+
+  r.seatId = newSeat.seatId;
+  r.seatNumber = newSeat.seatNumber;
+
+  res.json(r);
+};
+
 export const findActiveReservationBySeat = (req: Request, res: Response): void => {
   const seatNumber = parseInt(req.query['seatNumber'] as string, 10);
   if (!seatNumber || seatNumber < 1 || seatNumber > 100) {
