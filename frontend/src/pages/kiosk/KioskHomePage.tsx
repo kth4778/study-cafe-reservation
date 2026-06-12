@@ -89,6 +89,7 @@ export const KioskHomePage = () => {
   const { seats, setSeats, setLoading } = useSeatStore();
   const { setCurrentReservation } = useReservationStore();
   const [slideIndex, setSlideIndex] = useState(0);
+  const [isSlideVisible, setIsSlideVisible] = useState(true);
 
   useWebSocket();
 
@@ -100,7 +101,13 @@ export const KioskHomePage = () => {
   useEffect(() => { loadSeats(); }, [loadSeats]);
 
   useEffect(() => {
-    const id = setInterval(() => setSlideIndex((i) => (i + 1) % NOTICE_SLIDES.length), 4000);
+    const id = setInterval(() => {
+      setIsSlideVisible(false);
+      setTimeout(() => {
+        setSlideIndex((i) => (i + 1) % NOTICE_SLIDES.length);
+        setIsSlideVisible(true);
+      }, 200);
+    }, 4000);
     return () => clearInterval(id);
   }, []);
 
@@ -203,7 +210,10 @@ export const KioskHomePage = () => {
           </div>
 
           {/* 중앙: 일러스트 */}
-          <div className="flex-1 flex items-center justify-center py-2">
+          <div
+            className="flex-1 flex items-center justify-center py-2 transition-opacity duration-200"
+            style={{ opacity: isSlideVisible ? 1 : 0 }}
+          >
             <NoticeIllustration
               Icon={slide.Icon}
               color={slide.tagColor}
@@ -212,7 +222,10 @@ export const KioskHomePage = () => {
           </div>
 
           {/* 하단: 텍스트 */}
-          <div className="px-4 pb-3 text-center">
+          <div
+            className="px-4 pb-3 text-center transition-opacity duration-200"
+            style={{ opacity: isSlideVisible ? 1 : 0 }}
+          >
             <div className="h-px bg-gray-100 mb-2.5" />
             <p className="text-sm font-black text-gray-900 leading-snug">{slide.title}</p>
             <p className="text-[10px] text-gray-400 mt-1 leading-relaxed">{slide.preview}</p>
