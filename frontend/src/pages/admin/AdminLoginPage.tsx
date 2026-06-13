@@ -11,8 +11,8 @@ export const AdminLoginPage = () => {
   const setAuth = useAuthStore((s) => s.setAuth);
 
   const [step, setStep] = useState<LoginStep>('credentials');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('admin1234');
   const [otp, setOtp] = useState('000000');
   const [showPw, setShowPw] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
