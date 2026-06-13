@@ -1,5 +1,7 @@
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api';
-export const WS_URL = import.meta.env.VITE_WS_URL ?? 'http://localhost:4000';
+const BACKEND_URL = 'https://study-cafe-reservation.onrender.com';
+
+export const API_BASE_URL = import.meta.env.DEV ? '/api' : `${BACKEND_URL}/api`;
+export const WS_URL = import.meta.env.DEV ? 'http://localhost:4000' : BACKEND_URL;
 
 export const IDLE_TIMEOUT_MS = 3 * 60 * 1000; // 3분
 export const HEARTBEAT_INTERVAL_MS = 10_000;   // 10초
