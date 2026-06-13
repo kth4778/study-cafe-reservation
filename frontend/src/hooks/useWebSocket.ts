@@ -21,7 +21,7 @@ export const useWebSocket = () => {
   useEffect(() => {
     // Create shared connection on first mount
     if (!sharedSocket) {
-      sharedSocket = io(WS_URL, { transports: ['websocket'], reconnection: true });
+      sharedSocket = io(WS_URL, { transports: ['polling', 'websocket'], reconnection: true });
 
       sharedSocket.on('seats:init', (seats) => {
         setSeats(seats);
