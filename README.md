@@ -1,5 +1,10 @@
 <div align="center">
 
+### 🌐 &nbsp; [**웹사이트 바로가기 — Live Demo 👉 클릭**](https://frontend-eight-beryl-27.vercel.app/) &nbsp; 🌐
+
+[![웹사이트 바로가기](https://img.shields.io/badge/%E2%96%B6%20Live%20Demo-FF6D00?style=for-the-badge&logo=vercel&logoColor=white)](https://frontend-eight-beryl-27.vercel.app/)
+
+
 # 🪑 스터디 오아시스 (Study Oasis)
 
 <h3>키오스크 하나로 좌석 선택·결제·연장·퇴실까지<br/>무인 스터디카페 통합 관리 시스템</h3>
